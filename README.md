@@ -5,26 +5,26 @@ Prescriptive process monitoring (PresPM) studies techniques that leverage event 
 ## Structure of the code
 The structure of the code is as follows:
 
-Process_Pilot/
-|_ data_logs/                           # Preprocessed event logs used in the experiments
-|_ dataset_manager/                     # Utilities for loading and managing event logs
-|_ Final_plots/                         # Figures included in the paper
-|_ SimBank/
-    |_ SimBank/                         # The SimBank simulator code provided by De Moor et al.(2025).
-        |_ activity_execution.py                    # Execute an acivity in the process            
-        |_ confounding level.py                     # Create a dataset with a specified confounding level
-        |_ extra_flow_conditions.py                 # The (extra) underlying mechanism of the control-flow         
-        |_ petri_net_generator.py                   # Setup initial control-flow
-        |_ requirements.txt                         # Requirements of the SimBank simulator only
-        |_ SimBank_Generator_Guide.ipynb            # Guide on how to use SimBank       
-        |_ simulation.py                            # Main simulator code
-|_ src/                                 # Main code for the experiments
-    |_ slurm_files/                                 # Slurm files to run the experiments
-    |_ bisimulation_distance.py                     # Compute bisimulation distance and other quality measures
-    |_ MDP_functions.py                             # Contains core functions for defining the MDP
-    |_ testing.py                                   # Evaluate the RL agent on testing cases
-    |_ training.py                                  # Training the RL agent on training cases
-    |_ utils.py                                     # Utilities 
+- **Process_Pilot/**
+  - **data_logs/** – Preprocessed event logs used in the experiments
+  - **dataset_manager/** – Utilities for loading and managing event logs
+  - **Final_plots/** – Figures included in the paper
+  - **SimBank/**
+    - **SimBank/** – The SimBank simulator code provided by De Moor et al. (2025)
+      - `activity_execution.py` – Execute an activity in the process
+      - `confounding_level.py` – Create a dataset with a specified confounding level
+      - `extra_flow_conditions.py` – The (extra) underlying mechanism of the control-flow
+      - `petri_net_generator.py` – Setup initial control-flow
+      - `requirements.txt` – Requirements of the SimBank simulator only
+      - `SimBank_Generator_Guide.ipynb` – Guide on how to use SimBank
+      - `simulation.py` – Main simulator code
+  - **src/** – Main code for the experiments
+    - **slurm_files/** – Slurm files to run the experiments
+    - `bisimulation_distance.py` – Compute bisimulation distance and other quality measures
+    - `MDP_functions.py` – Contains core functions for defining the MDP
+    - `testing.py` – Evaluate the RL agent on testing cases
+    - `training.py` – Training the RL agent on training cases
+    - `utils.py` – Utilities
 
 ## Installation.
 The ```requirements.txt``` file provides the necessary packages for all experiments. 
