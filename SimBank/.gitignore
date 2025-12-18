@@ -1,0 +1,11 @@
+data/*
+res/*
+__pycache__/
+*.py[cod]
+data backup (still need to preprocess confounding).zip
+
+!data/
+!res/
+
+!data/.gitkeep
+!res/.gitkeep

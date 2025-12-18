@@ -1,0 +1,19 @@
+sbatch SimBank.slurm
+sbatch BPIC12.slurm
+sbatch BPIC17.slurm
+sbatch sepsis_cases_1.slurm
+sbatch sepsis_cases_2.slurm
+sbatch hospital.slurm
+sbatch Traffic.slurm
+sbatch SimBank_bisim_training_partial.slurm
+sbatch SimBank_bisim_training_full.slurm
+
+sbatch bisim_distance_simbank.slurm
+sbatch bisim_distance_bpic12.slurm
+sbatch bisim_distance_bpic17.slurm
+sbatch bisim_distance_hospital.slurm
+sbatch bisim_distance_sepsis_cases_2.slurm
+sbatch bisim_distance_sepsis_cases_1.slurm
+sbatch bisim_distance_traffic.slurm
+sbatch bisim_distance_simbank_additional_full.slurm
+sbatch bisim_distance_simbank_additional_partial.slurm

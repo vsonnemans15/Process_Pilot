@@ -1,0 +1,52 @@
+#!/bin/bash
+#SBATCH --job-name=trad
+#SBATCH --array=0-8  
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=150G
+#SBATCH --output=logsbisim/traffic_%A_%a.out
+#SBATCH --error=logsbisim/traffic_%A_%a.err   
+#SBATCH --time=0-18:30:00
+#SBATCH --exclude=spartan-bm139
+
+module purge
+module load Anaconda3
+eval "$(conda shell.bash hook)"
+conda activate rl_env
+
+# Define configs
+ABSTRACTIONS=("contextual" "False" "structural-knn" "action-set-knn"
+        "full_k_means" "full_k_means"
+        "partial_k_means" "partial_k_means" "branchi")
+KS=(
+    0 0 0 0 
+    1000 500
+    1000 500 0)  
+# Define datasets
+DATASETS=("traffic_fines_1")
+
+# Compute dataset index and config index
+CONFIG_COUNT=${#ABSTRACTIONS[@]}   # 9
+DATASET_INDEX=$(( SLURM_ARRAY_TASK_ID / CONFIG_COUNT ))
+CONFIG_INDEX=$(( SLURM_ARRAY_TASK_ID % CONFIG_COUNT ))
+
+DATASET=${DATASETS[$DATASET_INDEX]}
+ABSTRACTION=${ABSTRACTIONS[$CONFIG_INDEX]}
+K=${KS[$CONFIG_INDEX]}
+
+# Redirect logs per dataset/config
+exec > logsbisim/${DATASET}_${ABSTRACTION}_k${K}_%A_%a.out 2> logsbisim/${DATASET}_${ABSTRACTION}_k${K}_%A_%a.err
+
+cd ../
+
+# Run Python script
+python bisimulation_distance.py \
+  --dataset $DATASET \
+  --state_abstraction $ABSTRACTION \
+  --k $K \
+  --binary_outcome False \
+  --c 0.1 \
+  --pair_sample_ratio 0.001
+
+##DO NOT ADD/EDIT BEYOND THIS LINE##
+my-job-stats -a -n -s
